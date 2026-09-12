@@ -11222,7 +11222,7 @@ function renderSaveHub(){
    }
 
    const club=x.clubObj;
-   return `<article class="careerSlotV530 careerSlotV532 activeV530 ${selectedSlot===i?"selectedV530":""}" data-slot="${i}" tabindex="0" role="button">
+   return `<article class="careerSlotV530 careerSlotV532 activeV530 ${selectedSlot===i?"selectedV530":""}" data-slot="${i}">
      <div class="slotNumberV530 slotNumberV532">${String(i+1).padStart(2,"0")}</div>
      <div class="activePortraitV530 activePortraitV532">${avatarHTML(x.look,club)}</div>
 
@@ -11287,19 +11287,15 @@ function renderSaveHub(){
    document.querySelectorAll(".careerSlotV530.activeV530").forEach(el=>el.classList.toggle("selectedV530",+el.dataset.slot===i));
  }
 
- document.querySelectorAll(".careerSlotV530").forEach(card=>{
+ document.querySelectorAll(".careerSlotV530.emptyV530").forEach(card=>{
    card.onclick=e=>{
      if(e.target.closest("button"))return;
-     const i=+card.dataset.slot;
-     if(slotState(i)){selectSlot(i);enterLoadedSlot(i)}
-     else beginNewSlot(i);
+     beginNewSlot(+card.dataset.slot);
    };
    card.onkeydown=e=>{
      if(e.key==="Enter"||e.key===" "){
        e.preventDefault();
-       const i=+card.dataset.slot;
-       if(slotState(i)){selectSlot(i);enterLoadedSlot(i)}
-       else beginNewSlot(i);
+       beginNewSlot(+card.dataset.slot);
      }
    };
  });
