@@ -13786,21 +13786,32 @@ try{
 .characterFieldsV542 input::placeholder{color:#607d89;opacity:.9;}
 </style>
 
-<style id="v05506-first-contract-card-height">
-/* v0.55.06 — Primeiro Contrato: +20px de altura por proposta */
-@media (max-width:760px){
-  .offerScreenV4018 .offerListV4018{
-    flex:0 0 auto!important;
-    height:auto!important;
-    min-height:0!important;
-    grid-template-rows:repeat(3, calc(var(--offer-card-base-height, 120px) + 20px))!important;
-    overflow:visible!important;
-  }
-  .offerScreenV4018 .offerCardV4018{
-    min-height:140px!important;
-    height:140px!important;
-    max-height:140px!important;
-    box-sizing:border-box!important;
+<style id="v05506-first-contract-real-height-fix">
+/* v0.55.06
+   PRIMEIRO CONTRATO
+   A lista possui 3 linhas iguais. +60px na área disponível = +20px por card.
+   Mantém o conteúdo e os botões dentro de cada card.
+*/
+.offerScreenV4018{
+  height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 78px)!important;
+  overflow:visible!important;
+}
+.offerListV4018{
+  grid-template-rows:repeat(3,minmax(0,1fr))!important;
+  overflow:visible!important;
+}
+.offerCardV4018{
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:hidden!important;
+}
+
+/* A regra antiga para telas baixas usava -126px.
+   Também recebe +60px para preservar exatamente o mesmo ganho por card. */
+@media(max-height:730px){
+  .offerScreenV4018{
+    height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 66px)!important;
   }
 }
 </style>
